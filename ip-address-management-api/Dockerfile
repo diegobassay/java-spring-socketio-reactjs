@@ -1,7 +1,5 @@
 FROM maven:3.8-openjdk-17 as build
 
-
-
 COPY ip-address-management-api/src /home/app/src
 
 COPY ip-address-management-api/pom.xml /home/app
