@@ -1,6 +1,6 @@
-version: '3'
+version: '3.7'
 services:
-  app:
+  app_backend:
     container_name: ip-address-management-api
     stdin_open: true
     tty: true
@@ -9,3 +9,24 @@ services:
       dockerfile: ip-address-management-api/Dockerfile
     ports:
       - '8080:8080'
+    volumes:
+      - ./ip-address-management-api:/app
+  app_frontend:
+    container_name: ip-address-management-ui
+    build:
+       context: .
+       dockerfile: ip-address-management-ui/Dockerfile
+    command: >
+      sh -c "
+        echo '--------- INSTALL NODE MODULES'
+        ls -la
+        # npm install
+        echo '--------- START API SERVER FOR DEVELOPMENT'
+        npm run start --host 0.0.0.0
+        "
+    stdin_open: true
+    working_dir: /app
+    ports:
+      - 3000:3000
+    volumes:
+      - ./ip-address-management-ui:/app
