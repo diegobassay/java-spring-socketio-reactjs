@@ -8,7 +8,7 @@ spring:
     name: ip-address-management-api
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://D0CIDB12:3306/ip_address_management_db?useTimezone=true&serverTimezone=UTC
+    url: jdbc:mysql://app_database:3306/ip_address_management_db?useTimezone=true&serverTimezone=UTC
     username: root
     password: senhasecreta
   output:

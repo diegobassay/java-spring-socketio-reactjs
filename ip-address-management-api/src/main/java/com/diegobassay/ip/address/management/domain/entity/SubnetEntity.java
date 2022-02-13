@@ -33,7 +33,7 @@ public class SubnetEntity {
 
     @NotEmpty
     @Column(name = "name")
-    String code;
+    String name;
 
     @NotEmpty
     @Column(name = "description")
