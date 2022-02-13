@@ -11,6 +11,22 @@ services:
       - '8080:8080'
     volumes:
       - ./ip-address-management-api:/app
+    links:
+      - 'app_database:app_database'
+    depends_on:
+      - app_database
+
+  app_database:
+    image: 'mysql:5.7'
+    container_name: ip-address-management-db
+    command: '--max_allowed_packet=12345678M'
+    ports:
+      - '3306:3306'
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: senhasecreta
+      MYSQL_DATABASE: ip_address_management_db
+
   app_frontend:
     container_name: ip-address-management-ui
     build:

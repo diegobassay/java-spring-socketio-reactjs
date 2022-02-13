@@ -1,0 +1,18 @@
+server:
+  port: 8080
+  forward-headers-strategy: NATIVE
+
+spring:
+  application:
+    name: ip-address-management-api
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: ${URL_BASE_DADOS}
+    username: ${USER_BASE_DADOS}
+    password: ${PASSWORD_BASE_DADOS}
+  output:
+    ansi:
+      enabled: ALWAYS
+  jpa:
+    hibernate:
+      ddl-auto: update
