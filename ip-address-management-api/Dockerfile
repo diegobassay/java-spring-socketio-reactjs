@@ -14,4 +14,4 @@ COPY --from=build /app/target/ip.address.management-0.0.1-SNAPSHOT.jar /usr/loca
 
 RUN echo "America/Sao_Paulo"  > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
 
-ENTRYPOINT ["java","-XX:MinHeapFreeRatio=20","-XX:MaxHeapFreeRatio=40", "-jar", "/usr/local/lib/ip.address.management-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-XX:MinHeapFreeRatio=20","-XX:MaxHeapFreeRatio=40", "-Dspring.profiles.active=dev", "-jar", "/usr/local/lib/ip.address.management-0.0.1-SNAPSHOT.jar"]

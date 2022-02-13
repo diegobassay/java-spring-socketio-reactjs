@@ -3,16 +3,23 @@ server:
   forward-headers-strategy: NATIVE
 
 spring:
+  profiles: dev
   application:
     name: ip-address-management-api
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: ${URL_BASE_DADOS}
-    username: ${USER_BASE_DADOS}
-    password: ${PASSWORD_BASE_DADOS}
+    url: jdbc:mysql://D0CIDB12:3306/ip_address_management_db?useTimezone=true&serverTimezone=UTC
+    username: root
+    password: senhasecreta
   output:
     ansi:
       enabled: ALWAYS
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
+
+# validate: validate the schema, makes no changes to the database.
+# update: update the schema.
+# create: creates the schema, destroying previous data.
+# create-drop: drop the schema at the end of the session
+# none: is all other cases.
