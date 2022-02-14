@@ -1,4 +1,4 @@
-package com.diegobassay.ip.address.management.controller.domain.model;
+package com.diegobassay.ip.address.management.domain.model;
 
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.core.Relation;
@@ -27,13 +27,9 @@ public class SubnetModel extends RepresentationModel<SubnetModel> {
 
     String description;
 
-    String linkImage;
-
     String createdAt;
 
     IptableModel ip;
-
-
 
 
 }

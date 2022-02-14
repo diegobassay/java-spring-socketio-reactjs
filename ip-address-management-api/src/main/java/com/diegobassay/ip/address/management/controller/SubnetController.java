@@ -26,18 +26,33 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.stereotype.Component;
+import com.diegobassay.ip.address.management.domain.entity.*;
+import com.diegobassay.ip.address.management.domain.model.*;
+import com.diegobassay.ip.address.management.service.SubnetService;
+
+
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Component
-@Api(value = "NetworkEndpoint")
+@Api(value = "SubnetEndpoint")
 @RestController
 @RequestMapping("/network")
-public class NetworkController {
+public class SubnetController {
 
-    static final Logger LOG = LoggerFactory.getLogger(NetworkController.class);
+    static final Logger LOG = LoggerFactory.getLogger(SubnetController.class);
+
+    @Autowired
+    SubnetService subnetService;
 
     @ApiOperation(value = "Find a specific subnet by your ID" )
     @GetMapping(value = "/{id}", produces = { "application/json" })
     public ResponseEntity<List<String>> getSubnetById(@PathVariable(value = "id") Long id){
+
+
+        SubnetModel sb = subnetService.findModelById(id);
+
         return ResponseEntity.ok(Arrays.asList("127.0.0.1", "127.0.0.2"));
     }
 

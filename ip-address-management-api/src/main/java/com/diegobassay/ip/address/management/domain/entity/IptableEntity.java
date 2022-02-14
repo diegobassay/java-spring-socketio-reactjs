@@ -1,4 +1,4 @@
-package com.diegobassay.ip.address.management.controller.domain.entity;
+package com.diegobassay.ip.address.management.domain.entity;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,12 +17,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+@Entity
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 @Table(name = "ip_table")
 public class IptableEntity {
 

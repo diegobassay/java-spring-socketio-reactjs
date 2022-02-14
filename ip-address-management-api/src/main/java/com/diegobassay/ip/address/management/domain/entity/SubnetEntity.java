@@ -1,4 +1,4 @@
-package com.diegobassay.ip.address.management.controller.domain.entity;
+package com.diegobassay.ip.address.management.domain.entity;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,12 +17,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.CascadeType;
+import lombok.Builder;
 
+@Entity
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 @Table(name = "subnet")
 public class SubnetEntity {
 

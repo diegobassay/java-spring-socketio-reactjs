@@ -1,4 +1,4 @@
-package com.diegobassay.ip.address.management.controller.domain.model;
+package com.diegobassay.ip.address.management.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
