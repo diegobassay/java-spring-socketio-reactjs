@@ -80,11 +80,6 @@ public class SubnetController {
 
     @Operation(summary = "Find all subnets" )
     @GetMapping(produces = { "application/json", "application/xml", "application/x-yaml" })
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Retorna a lista de subnets", content = @Content),
-            @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este webservice", content = @Content),
-            @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção", content = @Content),
-    })
     public ResponseEntity<CollectionModel<SubnetModel>> findAll() {
         CollectionModel<SubnetModel> allSubnets = subnetService.findAll();
         return new ResponseEntity<>(allSubnets, HttpStatus.OK);
