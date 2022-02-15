@@ -21,12 +21,11 @@ public class IptableModel extends RepresentationModel<IptableModel> {
 
     Long id;
 
-    String code;
+    String ip;
 
-    String description;
+    String device;
 
     String createdAt;
 
     SubnetModel subnet;
-
 }

@@ -16,9 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class IptableModelAssembler extends RepresentationModelAssemblerSupport<IptableEntity, IptableModel> {
 
 
-    //@Autowired
-    //SubnetModelAssembler subnetModelAssembler;
-
     public IptableModelAssembler() {
         super(IptableController.class, IptableModel.class);
     }
@@ -28,9 +25,8 @@ public class IptableModelAssembler extends RepresentationModelAssemblerSupport<I
         IptableModel ipModel = instantiateModel(entity);
 
         ipModel.setId(entity.getId());
-        ipModel.setCode(entity.getCode());
-        ipModel.setDescription(entity.getDescription());
-        //ipModel.setSubnet(subnetModelAssembler.toModel(entity.getSubnet()));
+        ipModel.setDevice(entity.getDevice());
+        ipModel.setIp(entity.getIp());
 
         return ipModel;
 

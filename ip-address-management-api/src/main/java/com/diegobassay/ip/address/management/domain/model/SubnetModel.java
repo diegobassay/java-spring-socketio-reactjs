@@ -30,6 +30,4 @@ public class SubnetModel extends RepresentationModel<SubnetModel> {
     String createdAt;
 
     IptableModel ip;
-
-
 }

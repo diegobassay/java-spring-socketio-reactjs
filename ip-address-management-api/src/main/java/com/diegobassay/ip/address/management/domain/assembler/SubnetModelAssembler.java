@@ -29,7 +29,6 @@ public class SubnetModelAssembler extends RepresentationModelAssemblerSupport<Su
         subnetModel.setId(entity.getId());
         subnetModel.setName(entity.getName());
         subnetModel.setDescription(entity.getDescription());
-        //subnetModel.setIp(iptableModelAssembler.toModel(entity.getIp()));
 
         return subnetModel;
     }

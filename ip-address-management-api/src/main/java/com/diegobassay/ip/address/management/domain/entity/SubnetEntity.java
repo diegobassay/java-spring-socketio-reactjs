@@ -1,4 +1,5 @@
 package com.diegobassay.ip.address.management.domain.entity;
+import com.diegobassay.ip.address.management.domain.model.SubnetModel;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,5 +47,17 @@ public class SubnetEntity {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "iptable_id", referencedColumnName = "id")
     IptableEntity ip;
+
+
+    public static SubnetEntity toEntity(SubnetModel model) {
+        if(model == null)
+            return null;
+
+        return SubnetEntity.builder()
+                .id(model.getId())
+                .name(model.getName())
+                .description(model.getDescription())
+                .build();
+    }
 
 }

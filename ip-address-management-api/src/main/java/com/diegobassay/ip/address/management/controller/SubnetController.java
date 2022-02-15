@@ -3,6 +3,8 @@ package com.diegobassay.ip.address.management.controller;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +23,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.springdoc.api.annotations.ParameterObject;
+
 import org.springframework.stereotype.Component;
 import com.diegobassay.ip.address.management.domain.entity.*;
 import com.diegobassay.ip.address.management.domain.model.*;
@@ -36,7 +44,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Component
-@Api(value = "SubnetEndpoint")
+@Tag(name = "SubnetEndpoint", description = "")
 @RestController
 @RequestMapping("/network")
 public class SubnetController {
@@ -46,16 +54,47 @@ public class SubnetController {
     @Autowired
     SubnetService subnetService;
 
-    @ApiOperation(value = "Find a specific subnet by your ID" )
+    @Operation(summary = "Find a specific subnet by your ID" )
     @GetMapping(value = "/{id}", produces = { "application/json" })
-    public ResponseEntity<List<String>> getSubnetById(@PathVariable(value = "id") Long id){
-
+    public ResponseEntity<SubnetModel> getSubnetById(@Parameter(description = "id of subnet") @PathVariable(value = "id") Long id){
 
         SubnetModel sb = subnetService.findModelById(id);
+        return ResponseEntity.ok(sb);
 
-        return ResponseEntity.ok(Arrays.asList("127.0.0.1", "127.0.0.2"));
     }
 
+    @Operation(summary = "Update a specific subnet")
+    @PutMapping(value = "/{id}", consumes = { "application/json", "application/xml", "application/x-yaml" })
+    public ResponseEntity<SubnetModel> update(@PathVariable(value = "id") Long id, @ParameterObject @RequestBody @Valid SubnetModel model){
+        SubnetModel subnetModel = subnetService.update(id, model);
+        return new ResponseEntity<>(subnetModel, HttpStatus.OK);
+    }
 
+    @Operation(summary = "Create a new subnet")
+    @PostMapping(consumes = { "application/json", "application/xml", "application/x-yaml" },
+                 produces = { "application/json", "application/xml", "application/x-yaml" })
+    public ResponseEntity<SubnetModel> create(@ParameterObject @RequestBody @Valid SubnetModel model){
+        SubnetModel subnetModel = subnetService.create(model);
+        return new ResponseEntity<>(subnetModel, HttpStatus.CREATED);
+    }
+
+    @Operation(summary = "Find all subnets" )
+    @GetMapping(produces = { "application/json", "application/xml", "application/x-yaml" })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Retorna a lista de subnets", content = @Content),
+            @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este webservice", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção", content = @Content),
+    })
+    public ResponseEntity<CollectionModel<SubnetModel>> findAll() {
+        CollectionModel<SubnetModel> allSubnets = subnetService.findAll();
+        return new ResponseEntity<>(allSubnets, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Delete a specific subnet by your ID")
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id){
+        subnetService.delete(id);
+        return ResponseEntity.ok().build();
+    }
 
 }

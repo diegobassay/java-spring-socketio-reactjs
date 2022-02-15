@@ -19,10 +19,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 
 import com.diegobassay.ip.address.management.repository.SubnetRepository;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import com.diegobassay.ip.address.management.Application;
 import com.diegobassay.ip.address.management.domain.entity.SubnetEntity;
 
 @ExtendWith(MockitoExtension.class)

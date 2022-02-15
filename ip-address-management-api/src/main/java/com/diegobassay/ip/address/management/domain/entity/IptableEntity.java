@@ -1,4 +1,5 @@
 package com.diegobassay.ip.address.management.domain.entity;
+import com.diegobassay.ip.address.management.domain.model.IptableModel;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,16 +33,28 @@ public class IptableEntity {
 
     @NotEmpty
     @Column(name = "ip")
-    String code;
+    String ip;
 
     @NotEmpty
     @Column(name = "device")
-    String description;
+    String device;
 
     @Column(name = "created_at")
     String createdAt;
 
     @OneToOne(mappedBy = "ip")
     private SubnetEntity subnet;
+
+    public static IptableEntity toEntity(IptableModel model) {
+        if(model == null)
+            return null;
+
+        return IptableEntity.builder()
+                .id(model.getId())
+                .ip(model.getIp())
+                .device(model.getDevice())
+                .createdAt(model.getCreatedAt())
+                .build();
+    }
 
 }
