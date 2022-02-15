@@ -17,35 +17,26 @@ const SubnetPage: FunctionComponent<any> = (props: any) => {
   const [subnets, setSubnets] = useState<Subnet[]>([])
   const [subnet, setSubnet] = useState<Subnet>({name: null, description: null})
   const [open, setOpen] = React.useState(false);
-  const openModalForm = () => setOpen(true);
+  
   const closeModalForm = () => setOpen(false);
   const stylesForm = StylesForm();
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 100 },
     { field: 'name', headerName: 'Nome Subnet', width: 150 },
-    { field: 'description', headerName: 'Descrição', width: 150 },
+    { field: 'description', headerName: 'Descrição', width: 250 },
     { field: 'createdAt', headerName: 'Data Criação', width: 150 },
     {
       field: '       ',
       width: 100,
       sortable: false,
       renderCell: (params:any) => {
-        const onClickDelete = async () => {
-          setSubnet(params.row)
-          openModalForm()
-        };
-        const onClickEdit = async () => {
-
-
-        };
-  
         return (
           <>
-            <IconButton color="primary" onClick={onClickDelete}>
+            <IconButton color="primary" onClick={(e:React.ChangeEvent<any>) => onClickEdit(params)}>
               <EditIcon />
             </IconButton>
-            <IconButton color="error" onClick={onClickEdit}>
+            <IconButton color="error" onClick={(e:React.ChangeEvent<any>) => onClickDelete(params)}>
               <DeleteIcon />
             </IconButton>
           </>
@@ -54,14 +45,51 @@ const SubnetPage: FunctionComponent<any> = (props: any) => {
     }
   ];
 
-  useEffect(() => {
+  const onClickDelete = async (params:any) => {
+    if(window.confirm('Confirma a remoção de :'+params.row.name+' ?')){
+      subnetApi.delete(params.row).then((response:any) => {
+        list()
+      })
+      .catch((err:Error) => {
+        console.log(err)
+      });
+    }
+  };
+  const onClickEdit = async (params:any) => {
+    setSubnet(params.row)
+    setOpen(true)
+  };
+
+  const openModalForm = () => {
+    setSubnet({name: null, description: null})
+    setOpen(true)
+  }
+
+  const list = () => {
     subnetApi.findAll().then((response:any) => {
-      setSubnets(response.data._embedded.subnets);
+      setSubnets(response.data._embedded.subnets)
+      setOpen(false)
     })
     .catch((err:Error) => {
       console.log(err)
     });
-    
+  }
+
+  const save = () => {
+    let promisse = subnet.hasOwnProperty('id') 
+                  ? subnetApi.update(subnet)
+                  : subnetApi.create(subnet)
+
+    promisse.then((response:any) => {
+      list()
+    })
+    .catch((err:Error) => {
+      console.log(err)
+    });
+  };
+
+  useEffect(() => {
+    list()
   }, []);
 
   return (
@@ -95,7 +123,7 @@ const SubnetPage: FunctionComponent<any> = (props: any) => {
                 value={subnet.description} />
               </Grid>
               <Grid item spacing={3}>
-                <Button color="primary">Salvar</Button>
+                <Button color="primary" onClick={save}>Salvar</Button>
               </Grid>
               </form>
             </Grid>
