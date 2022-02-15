@@ -4,47 +4,23 @@ import { IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/ModeEdit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { subnetApi } from '../../services/Subnet'
-import { Subnet } from '../../types/Subnet'
+import { Subnet, SubnetType } from '../../types/Subnet'
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 260,
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  p: 4,
-};
+import { StylesForm, StylePopup, StyleDatagrid } from './styles'
 
 const SubnetPage: FunctionComponent<any> = (props: any) => {
 
   const [subnets, setSubnets] = useState<Subnet[]>([])
-  const [id, setId] = useState<number>(-1)
+  const [subnet, setSubnet] = useState<Subnet>({name: null, description: null})
   const [open, setOpen] = React.useState(false);
   const openModalForm = () => setOpen(true);
   const closeModalForm = () => setOpen(false);
+  const stylesForm = StylesForm();
 
-
-  const styles = makeStyles((theme: Theme) =>
-    createStyles({
-      formPopup: {
-        "& > *": {
-          margin: theme.spacing(1),
-          width: "25ch"
-        }
-      }
-    }),
-  )();
-
-  
   const columns = [
     { field: 'id', headerName: 'ID', width: 100 },
     { field: 'name', headerName: 'Nome Subnet', width: 150 },
@@ -56,9 +32,13 @@ const SubnetPage: FunctionComponent<any> = (props: any) => {
       sortable: false,
       renderCell: (params:any) => {
         const onClickDelete = async () => {
-          return alert(JSON.stringify(params.row, null, 4));
+          setSubnet(params.row)
+          openModalForm()
         };
-        const onClickEdit = async () => {};
+        const onClickEdit = async () => {
+
+
+        };
   
         return (
           <>
@@ -85,12 +65,10 @@ const SubnetPage: FunctionComponent<any> = (props: any) => {
   }, []);
 
   return (
-
-    
     <>
     <Button onClick={openModalForm}>Criar Subnet</Button>
-    
-    <div style={{ height: 400, width: '950px' }}>
+
+    <div style={StyleDatagrid}>
       <DataGrid
         rows={subnets}
         columns={columns}
@@ -101,14 +79,20 @@ const SubnetPage: FunctionComponent<any> = (props: any) => {
 
     <Modal open={open} onClose={closeModalForm} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
 
-        <Box sx={style} component="form" autoComplete="off" noValidate>
+        <Box sx={StylePopup} component="form" autoComplete="off" noValidate>
             <Grid>
-              <form className={styles.formPopup} noValidate autoComplete="off">
+              <form className={stylesForm.formPopup} noValidate autoComplete="off">
               <Grid item spacing={3}>
-                <TextField required id="text-name" label="Nome" />
+                <TextField required id="text-name" 
+                label="Nome" 
+                onChange={(ev: any) => {setSubnet({ ...subnet, name: ev.target.value })}} 
+                value={subnet.name} />
               </Grid>
               <Grid item spacing={3}>
-                <TextField required id="text-description" label="Descrição" />
+                <TextField required id="text-description" 
+                label="Descrição" 
+                onChange={(ev: any) => {setSubnet({ ...subnet, description: ev.target.value })}} 
+                value={subnet.description} />
               </Grid>
               <Grid item spacing={3}>
                 <Button color="primary">Salvar</Button>
@@ -116,7 +100,7 @@ const SubnetPage: FunctionComponent<any> = (props: any) => {
               </form>
             </Grid>
         </Box>
-
+        
       </Modal>
     </>
   );
