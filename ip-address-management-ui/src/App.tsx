@@ -4,7 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Subnets from './pages/Subnets';
+import SubnetPage from './pages/Subnet';
 
 function TabPanel(props:any) {
   const { children, value, index, ...other } = props;
@@ -48,7 +48,7 @@ const App: React.FC = () => {
 
   return (
     <Box
-      sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 224 }}
+      sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 400 }}
     >
       <Tabs
         orientation="vertical"
@@ -58,11 +58,11 @@ const App: React.FC = () => {
         aria-label="Vertical tabs example"
         sx={{ borderRight: 1, borderColor: 'divider' }}
       >
-        <Tab label="Item One" {...a11yProps(0)} />
-        <Tab label="Item Two" {...a11yProps(1)} />
+        <Tab label="Subnets" {...a11yProps(0)} />
+        <Tab label="Ip Tables" {...a11yProps(1)} />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <Subnets/>
+        <SubnetPage/>
       </TabPanel>
       <TabPanel value={value} index={1}>
         Item Two
