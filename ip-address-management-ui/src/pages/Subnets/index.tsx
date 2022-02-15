@@ -1,22 +1,8 @@
 import React, { FunctionComponent , useState, useEffect } from 'react'
 import { DataGrid } from '@mui/x-data-grid';
 
-/**
- * Classe de responsavel pela listagem incial de livros
- * Essa classe é usada na tela de CRUD
- * @param props - objeto com as propriedades declaradas nos atributos do componente
- * @author Bruna Leiras - bruna.leiras@spot-edu.com.br
- */
 const Subnets: FunctionComponent<any> = (props: any) => {
-  Long id;
 
-  String name;
-
-  String description;
-
-  String createdAt;
-
-  IptableModel ip;
   const [subnets, setSubnets] = useState([])
   const [id, setId] = useState<number>(-1)
   const columns = [
