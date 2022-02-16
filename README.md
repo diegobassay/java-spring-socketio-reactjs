@@ -44,7 +44,6 @@ cd app
 
 ## Para utilizar a API
 A api pode ser utilizada pelo Swagger 3 no endereço abaixo:
-O sistema foi construído usando TDD e possui 90% de cobertura, os relatórios podem ser encontrados em:
 ```
 http://localhost:8080/swagger-ui/index.html?configUrl=/v3/docs
 ```
