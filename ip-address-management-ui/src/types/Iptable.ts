@@ -1,12 +1,12 @@
 export type IptableType = {
     id?: number | null;
-    name: string | null;
-    description: string | null;
+    ip: string | null;
+    device: string | null;
 };
 
 export interface Iptable extends IptableType {
-    name: string | null;
-    description: string | null;
+    ip: string | null;
+    device: string | null;
 }
 
 export const IptablesTypeInitiator: Array<Iptable> = [];

@@ -15,14 +15,11 @@ import { SocketContext } from '../../services/socket'
 const IptablePage: FunctionComponent<any> = (props: any) => {
 
   const [iptables, setIptables] = useState<Iptable[]>([])
-  const [iptable, setIptable] = useState<Iptable>({name: null, description: null})
+  const [iptable, setIptable] = useState<Iptable>({ip: null, device: null})
   const [open, setOpen] = React.useState(false);
 
   const socket = useContext(SocketContext)
 
-  socket.on("ipinfo", (data: any) => {
-    console.log(data);
-  });
   
   const closeModalForm = () => setOpen(false);
 
@@ -65,11 +62,6 @@ const IptablePage: FunctionComponent<any> = (props: any) => {
     setOpen(true)
   };
 
-  const openModalForm = () => {
-    setIptable({name: null, description: null})
-    setOpen(true)
-  }
-
   const list = () => {
     iptableApi.findAll().then((response:any) => {
         setIptables(response.data._embedded.iptables)
@@ -97,13 +89,24 @@ const IptablePage: FunctionComponent<any> = (props: any) => {
     socket.emit('ipinfo', {id: null, ip: '127.0.0.1', device: 'meu device'})
   }
 
+  const openModalForm = () => {
+    setIptable({ip: null, device: null})
+    setOpen(true)
+  }
+
+
   useEffect(() => {
     list()
+
+
+    socket.on("ipinfo", (data: any) => {
+        console.log(data);
+    });
   }, [])
 
   return (
     <>
-    <Button onClick={sendSocketInfo}>Buscar Redes</Button>
+    <Button onClick={openModalForm}>Adicionar IP</Button>
 
     <div style={{height: 400, width: '950px' }}>
       <DataGrid
@@ -121,15 +124,15 @@ const IptablePage: FunctionComponent<any> = (props: any) => {
               <form noValidate autoComplete="off">
               <Grid item spacing={3}>
                 <TextField required id="text-name" 
-                label="Nome" 
-                onChange={(ev: any) => {setIptable({ ...iptable, name: ev.target.value })}} 
-                value={iptable.name} />
+                label="IP" 
+                onChange={(ev: any) => {setIptable({ ...iptable, ip: ev.target.value })}} 
+                value={iptable.ip} />
               </Grid>
               <Grid item spacing={3}>
                 <TextField required id="text-description" 
                 label="Descrição" 
-                onChange={(ev: any) => {setIptable({ ...iptable, description: ev.target.value })}} 
-                value={iptable.description} />
+                onChange={(ev: any) => {setIptable({ ...iptable, device: ev.target.value })}} 
+                value={iptable.device} />
               </Grid>
               <Grid item spacing={3}>
                 <Button color="primary" onClick={save}>Salvar</Button>
