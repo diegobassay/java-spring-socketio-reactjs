@@ -9,6 +9,13 @@ Aplicativo com usado para simular um IPAM (IP Address Management)
 * Docker >= version 20.10.12, build e91ed57
 * Docker Compose >= version 1.26.0, build d4451659
 
+## Tecnologias
+
+* Java 8
+* MySql 8
+* ReactJS 17.0 (Functional Components)
+* Typescript 4
+
 ## Para executar o projeto
 Para construir e executar o projeto é necessário executar os comandos abaixo na raiz do projeto:
 ```
@@ -48,6 +55,6 @@ ou pode se utilizar a postman collection adicionada ao projeto 'ip-address-manag
 ip-address-management-api/api.postman_collection.json
 ```
 
-![vnc](https://github.com/diegobassay/java-spring-socketio-reactjs/main/master/screenshots/screenshot3.png)
+![vnc](https://github.com/diegobassay/java-spring-socketio-reactjs/blob/main/screenshots/screenshot3.png)
 
 
