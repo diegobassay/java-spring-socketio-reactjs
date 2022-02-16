@@ -26,8 +26,7 @@ const SubnetPage: FunctionComponent<any> = (props: any) => {
     { field: 'name', headerName: 'Nome Subnet', width: 150 },
     { field: 'description', headerName: 'Descrição', width: 250 },
     { field: 'createdAt', headerName: 'Data Criação', width: 150 },
-    {
-      field: '       ',
+    { field: '       ',
       width: 100,
       sortable: false,
       renderCell: (params:any) => {
