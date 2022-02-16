@@ -1,15 +1,16 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
+import * as React from 'react'
+import PropTypes from 'prop-types'
+import Tabs from '@mui/material/Tabs'
+import Tab from '@mui/material/Tab'
+import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box';
-import SubnetPage from './pages/Subnet';
-import Container from '@mui/material/Container';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+import SubnetPage from './pages/Subnet'
+import IptablePage from './pages/Iptable'
+import Container from '@mui/material/Container'
+import AppBar from '@mui/material/AppBar'
+import Toolbar from '@mui/material/Toolbar'
+import IconButton from '@mui/material/IconButton'
+import MenuIcon from '@mui/icons-material/Menu'
 
 function TabPanel(props:any) {
   const { children, value, index, ...other } = props;
@@ -79,7 +80,7 @@ const App: React.FC = () => {
           <SubnetPage/>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Item Two
+          <IptablePage/>
         </TabPanel>
       </Box>
     </Container>

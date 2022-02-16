@@ -2,11 +2,7 @@ import React from 'react'
 
 import io from "socket.io-client";
 
-console.log("-----------------------------------TESTE-___---------------------------------------------")
-console.log(io)
+/* export const socket = io("http://localhost:8082/ipinfo?token=abc123", {transports: ["websocket", "polling"]}); */
 
-export const socket = io("http://localhost:9991/chat?token=abc123", {
-    transports: ['polling', 'websocket']
-});
-
+export const socket = {emit:(p1:string, p2:any) => {}, on:(p1:string, p2:any) => {}};
 export const SocketContext = React.createContext(socket);
