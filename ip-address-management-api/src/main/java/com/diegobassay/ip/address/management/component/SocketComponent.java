@@ -1,4 +1,4 @@
-package com.brunaleiras.socketio.modules;
+package com.diegobassay.ip.address.management.component;
 
 import com.diegobassay.ip.address.management.domain.model.IptableModel;
 import com.corundumstudio.socketio.HandshakeData;

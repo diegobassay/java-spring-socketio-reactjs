@@ -82,6 +82,16 @@ public class SubnetController {
     @GetMapping(produces = { "application/json", "application/xml", "application/x-yaml" })
     public ResponseEntity<CollectionModel<SubnetModel>> findAll() {
         CollectionModel<SubnetModel> allSubnets = subnetService.findAll();
+
+
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@");
+
+        System.out.println(allSubnets);
+
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@");
+
+
+
         return new ResponseEntity<>(allSubnets, HttpStatus.OK);
     }
 

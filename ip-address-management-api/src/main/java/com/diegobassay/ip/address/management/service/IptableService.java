@@ -39,6 +39,9 @@ public class IptableService {
 
     public IptableModel create(IptableModel model) {
         IptableEntity entity = IptableEntity.toEntity(model);
+        try{
+        entity.setCreatedAt(new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new java.util.Date()));
+        } catch(Exception e){System.out.println("error");}
         IptableEntity ipSaved = iptableRepository.save(entity);
         return iptableModelAssembler.toModel(ipSaved);
     }

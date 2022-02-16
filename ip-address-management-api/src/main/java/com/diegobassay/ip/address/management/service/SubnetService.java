@@ -40,14 +40,15 @@ public class SubnetService {
     }
 
     public SubnetModel create(SubnetModel model) {
-
         SubnetEntity entity = SubnetEntity.toEntity(model);
+        try{
+        entity.setCreatedAt(new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new java.util.Date()));
+        } catch(Exception e){System.out.println("error");}
         SubnetEntity subnetSaved = repository.save(entity);
         return subnetModelAssembler.toModel(subnetSaved);
     }
 
     public CollectionModel<SubnetModel> findAll() {
-        
         Iterable<SubnetEntity> list = repository.findAll();
         return subnetModelAssembler.toCollectionModel(list);
     }
