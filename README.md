@@ -17,7 +17,7 @@ docker-compose up
 ```
 Acessar o endereço: http://localhost:3000
 
-![vnc](https://github.com/diegobassay/java-spring-socketio-reactjs/blob/master/screenshots/screenshot1.png)
+![vnc](https://github.com/diegobassay/java-spring-socketio-reactjs/blob/main/screenshots/screenshot1.png)
 
 
 ## Para executar os testes
@@ -32,7 +32,7 @@ cd app
 ./mvnw test
 ```
 
-![vnc](https://github.com/diegobassay/java-spring-socketio-reactjs/blob/master/screenshots/screenshot2.png)
+![vnc](https://github.com/diegobassay/java-spring-socketio-reactjs/blob/main/screenshots/screenshot2.png)
 
 
 ## Para utilizar a API
@@ -48,6 +48,6 @@ ou pode se utilizar a postman collection adicionada ao projeto 'ip-address-manag
 ip-address-management-api/api.postman_collection.json
 ```
 
-![vnc](https://github.com/diegobassay/java-spring-socketio-reactjs/blob/master/screenshots/screenshot3.png)
+![vnc](https://github.com/diegobassay/java-spring-socketio-reactjs/main/master/screenshots/screenshot3.png)
 
 
