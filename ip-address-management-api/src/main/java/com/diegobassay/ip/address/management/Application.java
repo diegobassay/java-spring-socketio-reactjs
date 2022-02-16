@@ -13,9 +13,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
-@EntityScan({"com.diegobassay.ip.address.management.domain.entity"} )
-@EnableJpaRepositories("com.diegobassay.ip.address.management.*")
-@ComponentScan(basePackages={"com.diegobassay.ip.address.management.*"})
 public class Application {
 
     @Value("${websocket-server.host}")
@@ -31,7 +28,7 @@ public class Application {
         config.setPort(port);
         return new SocketIOServer(config);
     }
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
